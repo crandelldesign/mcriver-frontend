@@ -1,0 +1,7 @@
+<p>
+  homepage works!
+</p>
+<mc-login-form></mc-login-form>
+<div *ngIf="userService.user.loggedIn">
+  <button type="button" (click)="refresh()">Refresh</button>
+</div>
