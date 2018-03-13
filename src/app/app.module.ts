@@ -10,13 +10,16 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { UserService } from './user/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserInterceptor } from './user/user.interceptor';
+import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { NavComponent } from './layouts/nav/nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
-    HomepageComponent
+    HomepageComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -26,6 +29,8 @@ import { UserInterceptor } from './user/user.interceptor';
     FormsModule,
     HttpClientModule,
     TransferHttpCacheModule,
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     UserService,
