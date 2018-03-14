@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { UserService } from '../user/user.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
-  selector: 'mc-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  selector: 'mc-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   loggedInSub: Subscription;
 
