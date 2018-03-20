@@ -10,9 +10,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserService } from './user/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserInterceptor } from './user/user.interceptor';
-import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, CollapseModule, TabsModule } from 'ngx-bootstrap';
 import { NavComponent } from './layouts/nav/nav.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { ProductService } from './product/product.service';
 
 
 @NgModule({
@@ -32,11 +33,13 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     FormsModule,
     HttpClientModule,
     TransferHttpCacheModule,
+    BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    BsDropdownModule.forRoot()
+    TabsModule.forRoot()
   ],
   providers: [
     UserService,
+    ProductService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,

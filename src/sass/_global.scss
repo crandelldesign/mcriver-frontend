@@ -1,0 +1,15 @@
+/* Body */
+body {
+	font-family: 'Arimo', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.site-container {
+	color: $black;
+	@include media-breakpoint-up(sm) {
+		max-width: 1200px;
+		margin: 20px auto;
+	    border: 1px solid $black;
+	    border-radius: 25px;
+		@include box-shadow($z4-shadow);
+		overflow: hidden;
+	}
+}

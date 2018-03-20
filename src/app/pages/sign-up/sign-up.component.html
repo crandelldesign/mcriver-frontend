@@ -1,3 +1,9 @@
 <p>
   sign-up works!
 </p>
+<div *ngFor="let category of categories">
+  <h2>{{category.name}}</h2>
+  <div class="form-group" *ngFor="let item of category.items">
+    <label class="control-label col-sm-6 col-lg-4">{{item.name}}</label>
+  </div>
+</div>
