@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './user/login-form/login-form.component';
@@ -31,6 +31,7 @@ import { ProductService } from './product/product.service';
       { path: 'sign-up', component: SignUpComponent}
     ]),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TransferHttpCacheModule,
     BsDropdownModule.forRoot(),

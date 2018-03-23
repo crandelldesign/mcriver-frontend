@@ -1,9 +1,41 @@
-<p>
-  sign-up works!
-</p>
 <div *ngFor="let category of categories">
   <h2>{{category.name}}</h2>
   <div class="form-group" *ngFor="let item of category.items">
-    <label class="control-label col-sm-6 col-lg-4">{{item.name}}</label>
+    <p><strong>{{item.name}}</strong></p>
+    <div class="row" *ngIf="item.children.length == 0">
+      <div class="col-6 col-sm-3 col-lg-2">
+        <div class="quanity-count">
+          <div class="btn-group d-flex" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary w-100" (click)="updateTotal('decrease',item)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-secondary w-100" (click)="updateTotal('increase',item)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </div>
+          <div>{{item.quantity}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="item.children.length > 0">
+      <div class="col-6 col-sm-3 col-lg-2" *ngFor="let child of item.children">
+        <div class="quanity-count">
+          <div>{{child.short_name}}</div>
+          <div class="btn-group d-flex" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary w-100" (click)="updateTotal('decrease',child)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-secondary w-100" (click)="updateTotal('increase',child)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </div>
+          <div>{{child.quantity}}</div>
+        </div>
+      </div>
+    </div>
   </div>
+  <hr>
 </div>
+
+<p><strong>Total: ${{cartTotal}}</strong></p>
+
+<hr>
+
+<p>Do you agree to be fully paid before July 5th, 2018?<br>
+<label class="checkbox-inline">
+  <input type="checkbox" id="agreement" name="agreement" value="yes"> Yes, I agree to be fully paid by the date given.
+</label></p>
+
+<div class="price-box rounded-circle"><span class="total">Total:</span><span class="price">${{cartTotal}}</span></div>
