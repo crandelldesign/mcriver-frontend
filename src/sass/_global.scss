@@ -13,6 +13,13 @@ body {
 		overflow: hidden;
 	}
 }
+// Angular link without href
+a:not([href]){
+    cursor: pointer; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    user-select: none
+}
 .quanity-count {
 	@extend .bg-secondary;
 	text-align: center;

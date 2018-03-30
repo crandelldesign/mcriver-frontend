@@ -14,6 +14,7 @@ import { BsDropdownModule, CollapseModule, TabsModule } from 'ngx-bootstrap';
 import { NavComponent } from './layouts/nav/nav.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ProductService } from './product/product.service';
+import { PlaceOrderComponent } from './pages/place-order/place-order.component';
 
 
 @NgModule({
@@ -22,13 +23,15 @@ import { ProductService } from './product/product.service';
     LoginFormComponent,
     HomeComponent,
     NavComponent,
-    SignUpComponent
+    SignUpComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full'},
-      { path: 'sign-up', component: SignUpComponent}
+      { path: 'sign-up', component: SignUpComponent },
+      { path: 'place-order', component: PlaceOrderComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,
