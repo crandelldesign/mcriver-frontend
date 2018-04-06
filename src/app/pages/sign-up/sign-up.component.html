@@ -1,4 +1,4 @@
-<div *ngFor="let category of categories">
+<div *ngFor="let category of productsService.categories">
   <h2>{{category.name}}</h2>
   <div class="form-group" *ngFor="let item of category.items">
     <p><strong>{{item.name}}</strong></p>
@@ -55,13 +55,13 @@
   <hr>
 </div>
 
-<p><strong>Total: ${{cartTotal}}</strong></p>
+<p><strong>Total: ${{productsService.cartTotal}}</strong></p>
 
 <hr>
 
 <p>Do you agree to be fully paid before July 5th, 2018?<br>
 <label class="checkbox-inline">
-  <input type="checkbox" id="agreement" name="agreement" value="true"  (change)="agreement = !agreement"> Yes, I agree to be fully paid by the date given.
+  <input type="checkbox" id="agreement" name="agreement" value="true" [checked]="productsService.agreement" (change)="productsService.agreement = !productsService.agreement"> Yes, I agree to be fully paid by the date given.
 </label></p>
 
 <div class="alert alert-danger" *ngIf="validationErrors.length > 0">
@@ -72,4 +72,4 @@
 
 <p><button class="btn btn-lg center-block btn-primary" (click)="submitOrder()">Continue</button></p>
 
-<div class="price-box rounded-circle"><span class="total">Total:</span><span class="price">${{cartTotal}}</span></div>
+<div class="price-box rounded-circle"><span class="total">Total:</span><span class="price">${{productsService.cartTotal}}</span></div>

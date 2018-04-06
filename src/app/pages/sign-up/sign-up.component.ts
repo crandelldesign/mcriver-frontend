@@ -15,7 +15,6 @@ export class SignUpComponent implements OnInit {
   categories: Category[];
   cartTotal: number = 0;
   cartItems: any[] = [];
-  agreement: boolean = false;
   validationErrors: Array<string> = [];
 
 
@@ -25,57 +24,19 @@ export class SignUpComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.fetchCategories();
+    this.productsService.fetchCategories();
     /*this.myForm = this._fb.group({
       items: this._fb.array([])
     });*/
   }
 
-  fetchCategories() {
-    this.productsService.getCategories().subscribe(data => {
-      if (localStorage.getItem('cartItems') != null) {
-        this.cartItems = JSON.parse(localStorage.getItem('cartItems'));
-        
-      }
-      this.categories = data;
-
-      for (let x = 0; x < this.categories.length; x++) {
-
-        for (let y = 0; y < this.categories[x].items.length; y++) {
-          
-          if (this.categories[x].items[y].children.length == 0) {
-            this.categories[x].items[y].quantity = 0;
-            this.cartItems = this.cartItems.map(_item => {
-              if (_item.item.id == this.categories[x].items[y].id) {
-                this.categories[x].items[y].quantity = _item.item.quantity;
-              }
-              return _item
-            });
-          } else {
-            for (let z = 0; z < this.categories[x].items[y].children.length; z++) {
-              this.categories[x].items[y].children[z].quantity = 0;
-              this.cartItems = this.cartItems.map(_item => {
-                if (_item.item.id == this.categories[x].items[y].children[z].id) {
-                  this.categories[x].items[y].children[z].quantity = _item.item.quantity;
-                }
-                return _item
-              });
-            }
-          }
-        }
-      }
-
-      this.updateCartTotal();
-    });
-  }
-
-  updateTotal(direction,item) {
+  /*updateTotal(direction,item) {
     if (direction == 'increase') {
       item.quantity++;
-      this.cartTotal = this.cartTotal + item.price;
+      this.productsService.cartTotal = this.productsService.cartTotal + item.price;
     } else if (direction == 'decrease' && item.quantity != 0) {
       item.quantity--;
-      this.cartTotal = this.cartTotal - item.price;
+      this.productsService.cartTotal = this.productsService.cartTotal - item.price;
     }
     let exists = false
     //Search this product on the cart and increment the quantity
@@ -93,45 +54,37 @@ export class SignUpComponent implements OnInit {
     } else if (exists && item.quantity == 0) {
       this.cartItems.splice(this.cartItems.indexOf(item), 1);
     }
-  }
+  }*/
 
   updateCart(quantity, item) {
     item.quantity = quantity;
+    console.log(item.quantity);
     let exists = false
-    this.cartItems = this.cartItems.map(_item => {
+    this.productsService.cartItems = this.productsService.cartItems.map(_item => {
       if (_item.item.id == item.id) {
         exists = true
+        _item.item.quantity = quantity;
       }
       return _item
     });
     if (!exists && quantity > 0) {
-      this.cartItems.push({
+      this.productsService.cartItems.push({
         item:item,
       });
     } else if (exists && item.quantity == 0) {
-      this.cartItems.splice(this.cartItems.indexOf(item), 1);
+      this.productsService.cartItems.splice(this.productsService.cartItems.indexOf(item), 1);
     }
-    localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-    this.updateCartTotal();
-  }
-
-  updateCartTotal() {
-    console.log(this.cartItems);
-    let total = 0
-    this.cartItems.map(_item => {
-      console.log(_item.item.price);
-      total += (_item.item.price * _item.item.quantity);
-    });
-    this.cartTotal = total;
+    localStorage.setItem('cartItems', JSON.stringify(this.productsService.cartItems));
+    this.productsService.updateCartTotal();
   }
 
   submitOrder() {
     // Validate
     this.validationErrors = [];
-    if (this.cartItems.length == 0) {
+    if (this.productsService.cartItems.length == 0) {
       this.validationErrors.push('Please add items to your order.');
     }
-    if (!this.agreement) {
+    if (!this.productsService.agreement) {
       this.validationErrors.push('Please check the checkbox to agree.');
     }
 
