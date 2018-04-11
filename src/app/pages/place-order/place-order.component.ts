@@ -10,11 +10,12 @@ import { ProductService } from '../../product/product.service';
 export class PlaceOrderComponent implements OnInit {
 
   items: Item[];
+  isFirstOpen = true;
 
   constructor(
     public productsService: ProductService
   ) { 
-    
+    this.productsService.people = [];
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class PlaceOrderComponent implements OnInit {
     console.log(this.productsService.cartItems);
     this.productsService.cartItems.forEach((itemObject) =>{
       let item = itemObject['item'];
-      console.log(item)
+      console.log(item);
       if (item.slug == 'camping-people-in-group') {
         for (let index = 0; index < item.quantity; index++) {
           this.productsService.people.push({

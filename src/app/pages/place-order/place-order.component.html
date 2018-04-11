@@ -3,24 +3,43 @@
 </p>
 <div class="row">
   <div class="col-sm-6">
-    <div *ngFor="let person of productsService.people; index as i">
-      <div class="form-group">
-          <label class="control-label col-sm-3">
-              Person #{{i + 1}}
-          </label>
-          <div class="col-sm-9">
-              <div class="input-group">
-                  <input type="text" [(ngModel)]="productsService.people[i]['name']" class="form-control">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span>Is this person a rookie?&nbsp;</span>
-                      <input type="checkbox" aria-label="Is this person a rookie?" [(ngModel)]="productsService.people[i]['is_rookie']" (change)="productsService.people[i]['is_rookie'] = !productsService.people[i]['is_rookie']">
+    <accordion [closeOthers]="true">
+      <accordion-group heading="Content 1" [isOpen]="isFirstOpen">
+        <tabset [justified]="true">
+          <tab heading="Login" id="tab1">
+            <mc-login-form></mc-login-form>
+          </tab>
+          <tab heading="Create and Account">
+            <mc-register-form></mc-register-form>
+          </tab>
+          <tab heading="Basic Title 2">Basic content 2</tab>
+        </tabset>
+      </accordion-group>
+      <accordion-group heading="Names">
+        <div *ngFor="let person of productsService.people; index as i">
+            <div class="form-group">
+                <label class="control-label col-sm-3">
+                    Person #{{i + 1}}
+                </label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="productsService.people[i]['name']" class="form-control">
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span>Is this person a rookie?&nbsp;</span>
+                            <input type="checkbox" aria-label="Is this person a rookie?" [(ngModel)]="productsService.people[i]['is_rookie']" (change)="productsService.people[i]['is_rookie'] = !productsService.people[i]['is_rookie']">
+                          </div>
+                        </div>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
           </div>
-      </div>
-    </div>
+      </accordion-group>
+      <accordion-group heading="Content 2">
+        <p>accordion 3</p>
+      </accordion-group>
+    </accordion>
+    
   </div>
   <div class="col-sm-6">
     <h2 class="margin-top-0">Order Summary</h2>

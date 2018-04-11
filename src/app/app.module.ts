@@ -10,11 +10,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { UserService } from './user/user.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserInterceptor } from './user/user.interceptor';
-import { BsDropdownModule, CollapseModule, TabsModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NavComponent } from './layouts/nav/nav.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ProductService } from './product/product.service';
 import { PlaceOrderComponent } from './pages/place-order/place-order.component';
+import { RegisterFormComponent } from './user/register-form/register-form.component';
 
 
 @NgModule({
@@ -24,7 +28,8 @@ import { PlaceOrderComponent } from './pages/place-order/place-order.component';
     HomeComponent,
     NavComponent,
     SignUpComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -39,7 +44,8 @@ import { PlaceOrderComponent } from './pages/place-order/place-order.component';
     TransferHttpCacheModule,
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   providers: [
     UserService,
