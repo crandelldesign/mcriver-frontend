@@ -19,6 +19,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ProductService } from './product/product.service';
 import { PlaceOrderComponent } from './pages/place-order/place-order.component';
 import { RegisterFormComponent } from './user/register-form/register-form.component';
+import { LogoutComponent } from './user/logout/logout.component';
 
 
 @NgModule({
@@ -29,14 +30,16 @@ import { RegisterFormComponent } from './user/register-form/register-form.compon
     NavComponent,
     SignUpComponent,
     PlaceOrderComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'sign-up', component: SignUpComponent },
-      { path: 'place-order', component: PlaceOrderComponent }
+      { path: 'place-order', component: PlaceOrderComponent },
+      { path: 'logout', component: LogoutComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,

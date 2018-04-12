@@ -61,6 +61,22 @@ export class UserService {
 
     }
 
+    logout() {
+        let url = environment.api+'/auth/logout';
+        this.loading = true;
+        this.http.get<any>(url).subscribe(
+            data => {
+                // Perform logout functionality without the reroute
+                localStorage.removeItem('user_access');
+                this.user = new User();
+                // Set Login Status
+                this.setLoggedIn(false);
+                this.loading = false;
+                return new User();
+            }
+        );
+    }
+
     setLoggedIn(value: boolean) {
         // Update login status subject
         this.loggedIn$.next(value);
@@ -87,14 +103,13 @@ export class UserService {
                     });
             } else {
                 // Lets refresh
+                console.log('refresh');
                 this.getRefreshToken();
             }
       
         } else {
             // Perform logout functionality without the reroute
-            localStorage.clear();
-            //this.emitUserStatusChange(false);
-            //this.activationStatusCheck = false;
+            localStorage.removeItem('user_access');
             this.user = new User();
             // Set Login Status
             this.setLoggedIn(false);

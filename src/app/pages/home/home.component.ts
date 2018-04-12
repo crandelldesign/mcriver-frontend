@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loggedInSub = this.userService.loggedIn$.subscribe(
       loggedIn => {
+        console.log('hi');
         if (this.userService.user.loggedIn) {
           this.someOtherFunction();
         }
