@@ -12,6 +12,8 @@ export class UserService {
 
     user = new User();
     loginFormErrors = [];
+    registerFormErrors = [];
+    registerFormServerErrors: string = '';
 
     // Create a stream of logged in status to communicate throughout app
     loggedIn: boolean;
@@ -30,21 +32,7 @@ export class UserService {
         this.http.post<any>(url, { email: this.user.email, password: this.user.password }).subscribe(
             data => {
                 this.loading = false;
-
-                // Store Access Token
-                let access_expiration = new Date().getTime() + (parseInt(data['expires_in']) * 1000);
-                let user_access = JSON.stringify({ 
-                    access_token: data['access_token'], 
-                    access_expiration: access_expiration.toString() 
-                });
-                localStorage.setItem('user_access', user_access);
-
-                // Just to secure, let's remove passwords from the User class
-                this.user.password = null;
-                this.user.password_confirmation = null;
-
-                // Send to isLogged in to fetch and set all other user info
-                this.checkLoggedIn();
+                this.processLogin(data);
             },
             error => {
                 if (error.status == '401') {
@@ -58,7 +46,24 @@ export class UserService {
     }
 
     register() {
-
+        let url = environment.api+'/auth/register';
+        this.loading = true;
+        this.http.post<any>(url, { name: this.user.name, email: this.user.email, password: this.user.password, password_confirmation: this.user.password_confirmation }).subscribe(
+            data => {
+                this.loading = false;
+                console.log(data);
+                if (data['success']) {
+                    this.processLogin(data);
+                } else {
+                    this.registerFormErrors = data.error;
+                }
+            },
+            error => {
+                console.log(error);
+                this.loading = false;
+                this.registerFormServerErrors = 'An error occured trying to submit this form.';
+            }
+        );
     }
 
     logout() {
@@ -75,6 +80,23 @@ export class UserService {
                 return new User();
             }
         );
+    }
+
+    processLogin(data) {
+        // Store Access Token
+        let access_expiration = new Date().getTime() + (parseInt(data['expires_in']) * 1000);
+        let user_access = JSON.stringify({ 
+            access_token: data['access_token'], 
+            access_expiration: access_expiration.toString() 
+        });
+        localStorage.setItem('user_access', user_access);
+
+        // Just to secure, let's remove passwords from the User class
+        this.user.password = null;
+        this.user.password_confirmation = null;
+
+        // Send to isLogged in to fetch and set all other user info
+        this.checkLoggedIn();
     }
 
     setLoggedIn(value: boolean) {
