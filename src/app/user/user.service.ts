@@ -49,27 +49,6 @@ export class UserService {
             );
     }
 
-    registerOld() {
-        let url = environment.api+'/auth/register';
-        this.loading = true;
-        this.http.post<any>(url, { name: this.user.name, email: this.user.email, password: this.user.password, password_confirmation: this.user.password_confirmation }).subscribe(
-            data => {
-                this.loading = false;
-                console.log(data);
-                if (data['success']) {
-                    this.processLogin(data);
-                } else {
-                    this.registerFormErrors = data.error;
-                }
-            },
-            error => {
-                console.log(error);
-                this.loading = false;
-                this.registerFormServerErrors = 'An error occured trying to submit this form.';
-            }
-        );
-    }
-
     logout() {
         let url = environment.api+'/auth/logout';
         this.loading = true;
