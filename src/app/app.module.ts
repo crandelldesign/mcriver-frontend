@@ -20,7 +20,8 @@ import { ProductService } from './product/product.service';
 import { PlaceOrderComponent } from './pages/place-order/place-order.component';
 import { RegisterFormComponent } from './user/register-form/register-form.component';
 import { LogoutComponent } from './user/logout/logout.component';
-
+import { HttpErrorHandler }     from './http-error-handler.service';
+import { MessageService }       from './message.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { LogoutComponent } from './user/logout/logout.component';
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,
       multi: true
-    }
+    },
+    HttpErrorHandler,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

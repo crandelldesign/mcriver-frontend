@@ -8,11 +8,36 @@ import { UserService } from '../user.service';
 })
 export class LoginFormComponent implements OnInit {
 
+  // Disable Buttons while Loading
+  loading: boolean = false;
+  // Handle errors
+  loginFormErrors = [];
+
   constructor(
     public userService: UserService
   ) { }
 
   ngOnInit() {
+  }
+
+  login() {
+    this.loading = true;
+    this.userService.login().subscribe(
+      data => {
+        console.log(data);
+        this.loading = false;
+        if (data['success']) {
+          this.userService.processLogin(data);
+        } else {
+          this.loginFormErrors = data.error;
+        }
+      },
+      error => {
+        console.log(error.error.error);
+        this.loading = false;
+        this.loginFormErrors = error.error.error;
+      }
+    );
   }
 
 }

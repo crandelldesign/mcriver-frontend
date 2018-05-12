@@ -4,8 +4,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
+import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 @Injectable()
 export class UserService {
@@ -22,30 +25,31 @@ export class UserService {
     // Disable Buttons while Loading
     loading: boolean = false;
 
-    constructor(
-    private http: HttpClient
-    ) { }
+    private handleError: HandleError;
 
-    login() {
+    constructor(
+        private http: HttpClient,
+        httpErrorHandler: HttpErrorHandler) {
+        this.handleError = httpErrorHandler.createHandleError('UserService');
+    }
+
+    login (): Observable<any> {
         let url = environment.api+'/auth/login';
-        this.loading = true;
-        this.http.post<any>(url, { email: this.user.email, password: this.user.password }).subscribe(
-            data => {
-                this.loading = false;
-                this.processLogin(data);
-            },
-            error => {
-                if (error.status == '401') {
-                    console.log(error);
-                    this.loading = false;
-                    this.loginFormErrors = error.error.error;
-                }
-            }
-        );
-            
+        return this.http.post<any>(url, { email: this.user.email, password: this.user.password })
+            .pipe(
+                catchError(this.handleError('login', this.user))
+            );
     }
 
     register() {
+        let url = environment.api+'/auth/register';
+        return this.http.post<any>(url, { name: this.user.name, email: this.user.email, password: this.user.password, password_confirmation: this.user.password_confirmation })
+            .pipe(
+                catchError(this.handleError('register', this.user))
+            );
+    }
+
+    registerOld() {
         let url = environment.api+'/auth/register';
         this.loading = true;
         this.http.post<any>(url, { name: this.user.name, email: this.user.email, password: this.user.password, password_confirmation: this.user.password_confirmation }).subscribe(
