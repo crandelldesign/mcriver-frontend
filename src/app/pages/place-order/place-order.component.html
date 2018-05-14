@@ -1,46 +1,106 @@
-<p>
-  place-order works!
-</p>
 <div class="row">
   <div class="col-sm-6">
-    <accordion [closeOthers]="true">
-      <accordion-group heading="Login / Register" [isOpen]="isOpen == 1">
-        <tabset [justified]="true">
-          <tab heading="Login" id="tab1">
-            <mc-login-form></mc-login-form>
-          </tab>
-          <tab heading="Create an Account">
-            <mc-register-form></mc-register-form>
-          </tab>
-          <tab heading="Continue as Guest">
-            
-          </tab>
-        </tabset>
-      </accordion-group>
-      <accordion-group heading="Names" [isOpen]="isOpen == 2">
-        <div *ngFor="let person of productsService.people; index as i">
-            <div class="form-group">
+    <div class="accordion" id="accordion">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" (click)="collapse1.toggle()">
+              Login / Register
+            </button>
+          </h5>
+        </div>
+        <div class="collapse" data-parent="#accordion" #collapse1="bs-collapse" [collapse]="isPanel1Open" (expanded)="onAccordionChange(1,$event)">
+          <div class="card-body">
+            <tabset [justified]="true">
+              <tab heading="Login" id="tab1">
+                <mc-login-form></mc-login-form>
+              </tab>
+              <tab heading="Create an Account">
+                <mc-register-form></mc-register-form>
+              </tab>
+              <tab heading="Continue as Guest">
+                <button class="btn btn-primary" (click)="collapse2.toggle()">Checkout as Guest</button>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" (click)="collapse2.toggle()">
+              Names
+            </button>
+          </h5>
+        </div>
+        <div class="collapse" data-parent="#accordion" #collapse2="bs-collapse" [collapse]="isPanel2Open" (expanded)="onAccordionChange(2,$event)">
+          <div class="card-body">
+            <div *ngFor="let person of productsService.people; index as i">
+              <div class="form-group">
+                  <label class="control-label col-sm-3">
+                      Person #{{i + 1}}
+                  </label>
+                  <div class="col-sm-9">
+                      <div class="input-group">
+                          <input type="text" [(ngModel)]="productsService.people[i]['name']" class="form-control">
+                          <div class="input-group-append">
+                            <div class="input-group-text">
+                              <span>Is this person a rookie?&nbsp;</span>
+                              <input type="checkbox" aria-label="Is this person a rookie?" [(ngModel)]="productsService.people[i]['is_rookie']" (change)="productsService.people[i]['is_rookie'] = !productsService.people[i]['is_rookie']">
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="collapse3.toggle()">Continue</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" (click)="collapse3.toggle()">
+                Contact Information
+              </button>
+            </h5>
+          </div>
+          <div class="collapse" data-parent="#accordion" #collapse3="bs-collapse" [collapse]="isPanel3Open" (expanded)="onAccordionChange(3,$event)">
+            <div class="card-body">
+              <div class="form-group">
                 <label class="control-label col-sm-3">
-                    Person #{{i + 1}}
+                  Email
                 </label>
                 <div class="col-sm-9">
-                    <div class="input-group">
-                        <input type="text" [(ngModel)]="productsService.people[i]['name']" class="form-control">
-                        <div class="input-group-append">
-                          <div class="input-group-text">
-                            <span>Is this person a rookie?&nbsp;</span>
-                            <input type="checkbox" aria-label="Is this person a rookie?" [(ngModel)]="productsService.people[i]['is_rookie']" (change)="productsService.people[i]['is_rookie'] = !productsService.people[i]['is_rookie']">
-                          </div>
-                        </div>
-                    </div>
+                  <input type="text" [(ngModel)]="order.email" class="form-control">
                 </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3">
+                  Phone
+                </label>
+                <div class="col-sm-9">
+                  <input type="text" [(ngModel)]="order.phone" class="form-control">
+                </div>
+              </div>
+              <button class="btn btn-primary" (click)="collapse4.toggle()">Continue</button>
             </div>
           </div>
-      </accordion-group>
-      <accordion-group heading="Content 2">
-        <p>accordion 3</p>
-      </accordion-group>
-    </accordion>
+        </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" (click)="collapse4.toggle()">
+              Payment Information
+            </button>
+          </h5>
+        </div>
+        <div class="collapse" data-parent="#accordion" #collapse4="bs-collapse" [collapse]="isPanel4Open" (expanded)="onAccordionChange(4,$event)">
+          <div class="card-body">
+          </div>
+        </div>
+      </div>
+    </div>
     
   </div>
   <div class="col-sm-6">
