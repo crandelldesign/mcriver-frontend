@@ -22,6 +22,9 @@ import { RegisterFormComponent } from './user/register-form/register-form.compon
 import { LogoutComponent } from './user/logout/logout.component';
 import { HttpErrorHandler }     from './http-error-handler.service';
 import { MessageService }       from './message.service';
+import { PaymentComponent } from './payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { MessageService }       from './message.service';
     SignUpComponent,
     PlaceOrderComponent,
     RegisterFormComponent,
-    LogoutComponent
+    LogoutComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -49,7 +53,8 @@ import { MessageService }       from './message.service';
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    NgxStripeModule.forRoot(environment.stripeKey)
   ],
   providers: [
     UserService,
