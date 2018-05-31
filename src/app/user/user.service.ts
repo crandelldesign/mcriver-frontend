@@ -153,7 +153,16 @@ export class UserService {
 
                 // Send to isLogged in to fetch and set all other user info
                 this.checkLoggedIn();
-            });
+            },
+            error => {
+                localStorage.removeItem('user_access');
+                this.user = new User();
+                // Set Login Status
+                this.setLoggedIn(false);
+                this.loading = false;
+                return new User();
+            }
+        );
     }
 
 }

@@ -11,6 +11,8 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 })
 export class PaymentComponent implements OnInit {
 
+  // TODO Add input to control loading, add output emitter for token
+
   elements: Elements;
   card: StripeElement;
   paymentForm: FormGroup;
@@ -40,7 +42,6 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // TODO Add API call to get the stripe public key so it is not stored on the codebase
     this.stripeService.elements()
       .subscribe(elements => {
         this.elements = elements;
@@ -66,7 +67,7 @@ export class PaymentComponent implements OnInit {
 
   }
 
-  submitPayment() {
+  createToken() {
     this.loading = true;
     const name = this.cardHolderName;
     this.stripeService
@@ -87,27 +88,6 @@ export class PaymentComponent implements OnInit {
           this.loading = false;
         }
       });
-  }
-
-  getToken(event) {
-    this.loading = true;
-    console.log('hi');
-    (<any>window).Stripe.card.createToken({
-      number: this.cardNumber,
-      exp_month: this.expiryMonth,
-      exp_year: this.expiryYear,
-      cvc: this.cvc
-    }, (status: number, response: any) => {
-
-      // Wrapping inside the Angular zone
-      this._zone.run(() => {
-        if (status === 200) {
-          this.message = `Success! Card token ${response.card.id}.`;
-        } else {
-          this.message = response.error.message;
-        }
-      });
-    });
   }
 
 }
