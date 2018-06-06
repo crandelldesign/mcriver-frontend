@@ -22,6 +22,7 @@ import { RegisterFormComponent } from './user/register-form/register-form.compon
 import { LogoutComponent } from './user/logout/logout.component';
 import { HttpErrorHandler }     from './http-error-handler.service';
 import { MessageService }       from './message.service';
+import { OrderService } from './order/order.service';
 import { PaymentComponent } from './payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
@@ -59,6 +60,7 @@ import { environment } from '../environments/environment';
   providers: [
     UserService,
     ProductService,
+    OrderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,

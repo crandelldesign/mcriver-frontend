@@ -6,6 +6,7 @@ import { UserService } from '../../user/user.service';
 
 import { CollapseDirective } from 'ngx-bootstrap/collapse';
 import { Order } from '../../order/order';
+import { OrderService } from '../../order/order.service';
 
 @Component({
   selector: 'mc-place-order',
@@ -37,11 +38,13 @@ export class PlaceOrderComponent implements OnInit {
     message: ``
   };
   collapseFirstLoad = false;
+  paymentLoading: boolean = false;
 
   loggedInSub: Subscription;
 
   constructor(
     public productsService: ProductService,
+    private orderService: OrderService,
     private userService: UserService
   ) { 
     this.productsService.people = [];
@@ -132,6 +135,25 @@ export class PlaceOrderComponent implements OnInit {
       this.panel3Message.type = 'danger';
       this.panel3Message.message = 'Please enter both the contact email and phone number.';
     }
+  }
+
+  onToken(token: string) {
+    this.paymentLoading = true;
+    console.log(token);
+    //console.log(this.order);
+    //console.log(this.productsService.cartItems);
+    //console.log(this.productsService.people);
+    //console.log(this.userService.user.id);
+    this.order.total = this.productsService.cartTotal;
+    this.order.items = this.productsService.cartItems;
+    this.order.persons = this.productsService.people;
+    this.order.user = this.userService.user;
+    console.log(this.order);
+    
+    this.orderService.sendOrder(this.order, token).subscribe( data => {
+      console.log(data);
+    });
+    
   }
 
 }

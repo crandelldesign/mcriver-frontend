@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
@@ -11,14 +11,15 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 })
 export class PaymentComponent implements OnInit {
 
-  // TODO Add input to control loading, add output emitter for token
+  // Disable Buttons while Loading
+  @Input() loading: boolean = false;
+  @Output() tokenEmit = new EventEmitter<string>();
 
   elements: Elements;
   card: StripeElement;
   paymentForm: FormGroup;
 
-  // Disable Buttons while Loading
-  loading: boolean = false;
+  
   // Handle errors
   paymentFormErrors = {
     type: 'success',
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit {
   cvc: string;
 
   message: string;
+  token: string = ''
 
   //stripe = Stripe(environment.stripeKey);
 
@@ -79,6 +81,8 @@ export class PaymentComponent implements OnInit {
           console.log(result.token);
           this.paymentFormErrors.type = 'success';
           this.paymentFormErrors.message = result.token.toString();
+          this.token = result.token.id;
+          this.tokenEmit.emit(this.token);
           this.loading = false;
         } else if (result.error) {
           // Error creating the token

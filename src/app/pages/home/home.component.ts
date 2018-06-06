@@ -38,4 +38,8 @@ export class HomeComponent implements OnInit {
     this.userService.getRefreshToken();
   }
 
+  onToken(token: string) {
+    console.log(token);
+  }
+
 }
