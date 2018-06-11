@@ -6,6 +6,7 @@ export class Order {
     email: string;
     phone: string;
     total: number = 0;
+    paymentMethod: string;
     items: Array<Item>;
     persons: Array<any>;
     user: User;

@@ -59,7 +59,7 @@ export class PlaceOrderComponent implements OnInit {
         for (let index = 0; index < item.quantity; index++) {
           this.productsService.people.push({
             name: 'Person #' + (index + 1),
-            is_rookie: false,
+            isRookie: false,
             price: item.price
           });
         }
@@ -110,6 +110,7 @@ export class PlaceOrderComponent implements OnInit {
       }
     });
     if (validated) {
+      console.log(this.productsService.people);
       this.panel2Message.message = '';
       this.isPanel3Disabled = false;
       this.collapse3.toggle();
@@ -144,6 +145,7 @@ export class PlaceOrderComponent implements OnInit {
     //console.log(this.productsService.cartItems);
     //console.log(this.productsService.people);
     //console.log(this.userService.user.id);
+    this.order.paymentMethod = 'credit card';
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
     this.order.persons = this.productsService.people;
@@ -152,6 +154,7 @@ export class PlaceOrderComponent implements OnInit {
     
     this.orderService.sendOrder(this.order, token).subscribe( data => {
       console.log(data);
+      this.paymentLoading = false;
     });
     
   }
