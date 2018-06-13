@@ -1,0 +1,32 @@
+<h1>Thank You for Your Order</h1>
+
+<p>Your Order Number: <strong>{{order.friendly_order_id}}</strong></p>
+
+<p>You will receive an email with your order.</p>
+
+<div *ngIf="order.payment == 'check'">
+  <p>Please send a check or money order to the address below by July 5, 2016.</p>
+  <address>
+      Jim McDonald<br>
+      4323 Crestdale Ave<br>
+      West Bloomfield, MI 48323<br>
+  </address>
+</div>
+
+<h2 class="margin-top-0">Your Order</h2>
+<table class="table table-striped">
+  <tr *ngFor="let person of order.persons">
+      <td>{{person.name}}</td>
+      <td>${{person.price}}</td>
+  </tr>
+  <ng-container *ngFor="let item of order.items; index as i">
+    <tr *ngIf="item.slug != 'camping-people-in-group'">
+      <td>{{item.name}}</td>
+      <td>${{item.price}}</td>
+    </tr>
+  </ng-container>
+    <tr>
+        <th>Total</th>
+        <th>${{order.total}}</th>
+    </tr>
+</table>

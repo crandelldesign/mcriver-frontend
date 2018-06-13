@@ -17,8 +17,12 @@ export class OrderService {
     this.handleError = httpErrorHandler.createHandleError('UserService');
   }
   
+  getOrder(friendlyOrderId): Observable<any> {
+    let url = environment.api+'/order/'+friendlyOrderId;
+    return this.http.get<any>(url).pipe(catchError(this.handleError('order', friendlyOrderId)));
+  }
 
-  sendOrder (order, token): Observable<any> {
+  sendOrder(order, token): Observable<any> {
     let url = environment.api+'/order';
     return this.http.post<any>(url, { order: order, token: token })
       .pipe(

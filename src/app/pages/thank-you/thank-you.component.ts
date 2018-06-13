@@ -1,0 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Order } from '../../order/order';
+import { OrderService } from '../../order/order.service';
+
+@Component({
+  selector: 'mc-thank-you',
+  templateUrl: './thank-you.component.html',
+  styleUrls: ['./thank-you.component.scss']
+})
+export class ThankYouComponent implements OnInit {
+
+  order = new Order();
+
+  constructor(
+    public orderService: OrderService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(params => {
+      console.log(params['friendlyOrderId'])
+      this.order.friendly_order_id = params['friendlyOrderId'];
+      this.fetchOrder(this.order);
+   });
+  }
+
+  ngOnInit() {
+  }
+
+  fetchOrder(order) {
+    this.orderService.getOrder(order.friendly_order_id).subscribe( data => {
+      console.log(data);
+      this.order = data;
+      console.log(this.order);
+      this.order.items.forEach( (item, index) => {
+        if (item['slug'] == 'camping-people-in-group') {
+          this.order.persons[index].price = item.price;
+        }
+      });
+    });
+  }
+
+}

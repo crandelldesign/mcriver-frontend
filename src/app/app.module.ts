@@ -26,6 +26,7 @@ import { OrderService } from './order/order.service';
 import { PaymentComponent } from './payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { environment } from '../environments/environment';
     PlaceOrderComponent,
     RegisterFormComponent,
     LogoutComponent,
-    PaymentComponent
+    PaymentComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -45,6 +47,7 @@ import { environment } from '../environments/environment';
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'sign-up', component: SignUpComponent },
       { path: 'place-order', component: PlaceOrderComponent },
+      { path: 'thank-you/:friendlyOrderId', component: ThankYouComponent },
       { path: 'logout', component: LogoutComponent }
     ]),
     FormsModule,

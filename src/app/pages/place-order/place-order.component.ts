@@ -7,6 +7,7 @@ import { UserService } from '../../user/user.service';
 import { CollapseDirective } from 'ngx-bootstrap/collapse';
 import { Order } from '../../order/order';
 import { OrderService } from '../../order/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mc-place-order',
@@ -45,7 +46,8 @@ export class PlaceOrderComponent implements OnInit {
   constructor(
     public productsService: ProductService,
     private orderService: OrderService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { 
     this.productsService.people = [];
   }
@@ -76,6 +78,7 @@ export class PlaceOrderComponent implements OnInit {
             this.productsService.people[0].name = this.userService.user.name;
           }
           this.order.email = this.userService.user.email;
+          this.order.phone = this.userService.user.phone;
         }
       }
     );
@@ -145,7 +148,7 @@ export class PlaceOrderComponent implements OnInit {
     //console.log(this.productsService.cartItems);
     //console.log(this.productsService.people);
     //console.log(this.userService.user.id);
-    this.order.paymentMethod = 'credit card';
+    this.order.payment_method = 'credit card';
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
     this.order.persons = this.productsService.people;
@@ -154,6 +157,9 @@ export class PlaceOrderComponent implements OnInit {
     
     this.orderService.sendOrder(this.order, token).subscribe( data => {
       console.log(data);
+      if (data['friendly_order_id']) {
+        this.router.navigate(['/thank-you', data['friendly_order_id']]);
+      }
       this.paymentLoading = false;
     });
     

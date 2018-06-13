@@ -78,9 +78,8 @@ export class PaymentComponent implements OnInit {
         if (result.token) {
           // Use the token to create a charge or a customer
           // https://stripe.com/docs/charges
-          console.log(result.token);
-          this.paymentFormErrors.type = 'success';
-          this.paymentFormErrors.message = result.token.toString();
+          //this.paymentFormErrors.type = 'success';
+          //this.paymentFormErrors.message = result.token.toString();
           this.token = result.token.id;
           this.tokenEmit.emit(this.token);
           this.loading = false;
