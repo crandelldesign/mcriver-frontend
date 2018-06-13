@@ -158,6 +158,7 @@ export class PlaceOrderComponent implements OnInit {
     this.orderService.sendOrder(this.order, token).subscribe( data => {
       console.log(data);
       if (data['friendly_order_id']) {
+        localStorage.removeItem('cartItems');
         this.router.navigate(['/thank-you', data['friendly_order_id']]);
       }
       this.paymentLoading = false;
