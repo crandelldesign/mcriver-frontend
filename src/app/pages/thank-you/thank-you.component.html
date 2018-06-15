@@ -13,20 +13,23 @@
   </address>
 </div>
 
-<h2 class="margin-top-0">Your Order</h2>
-<table class="table table-striped">
-  <tr *ngFor="let person of order.persons">
-      <td>{{person.name}}</td>
-      <td>${{person.price}}</td>
-  </tr>
-  <ng-container *ngFor="let item of order.items; index as i">
-    <tr *ngIf="item.slug != 'camping-people-in-group'">
-      <td>{{item.name}}</td>
-      <td>${{item.price}}</td>
+<div id="order">
+  <h2 class="margin-top-0">Your Order</h2>
+  <table class="table table-striped">
+    <tr *ngFor="let person of order.persons">
+        <td>{{person.name}}</td>
+        <td>${{person.price}}</td>
     </tr>
-  </ng-container>
-    <tr>
-        <th>Total</th>
-        <th>${{order.total}}</th>
-    </tr>
-</table>
+    <ng-container *ngFor="let item of order.items; index as i">
+      <tr *ngIf="item.slug != 'camping-people-in-group'">
+        <td>{{item.name}}</td>
+        <td>${{item.price}}</td>
+      </tr>
+    </ng-container>
+      <tr>
+          <th>Total</th>
+          <th>${{order.total}}</th>
+      </tr>
+  </table>
+</div>
+<p class="text-center"><button class="btn btn-primary" (click)="sharedService.printOrder('order')">Print Order</button></p>

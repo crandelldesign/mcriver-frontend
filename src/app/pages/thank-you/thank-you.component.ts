@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '../../order/order';
 import { OrderService } from '../../order/order.service';
+import {  } from 'print-js';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'mc-thank-you',
@@ -14,10 +16,10 @@ export class ThankYouComponent implements OnInit {
 
   constructor(
     public orderService: OrderService,
+    public sharedService: SharedService,
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
-      console.log(params['friendlyOrderId'])
       this.order.friendly_order_id = params['friendlyOrderId'];
       this.fetchOrder(this.order);
    });

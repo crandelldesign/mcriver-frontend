@@ -27,6 +27,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { SharedService } from './shared/shared.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ThankYouComponent } from './pages/thank-you/thank-you.component';
     UserService,
     ProductService,
     OrderService,
+    SharedService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,
