@@ -28,6 +28,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 import { SharedService } from './shared/shared.service';
+import { OrderLookupComponent } from './pages/order-lookup/order-lookup.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SharedService } from './shared/shared.service';
     RegisterFormComponent,
     LogoutComponent,
     PaymentComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    OrderLookupComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -49,6 +51,7 @@ import { SharedService } from './shared/shared.service';
       { path: 'sign-up', component: SignUpComponent },
       { path: 'place-order', component: PlaceOrderComponent },
       { path: 'thank-you/:friendlyOrderId', component: ThankYouComponent },
+      { path: 'order-lookup', component: OrderLookupComponent },
       { path: 'logout', component: LogoutComponent }
     ]),
     FormsModule,

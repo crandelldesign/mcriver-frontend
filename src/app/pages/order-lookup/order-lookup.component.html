@@ -1,0 +1,43 @@
+<h1>Order Lookup</h1>
+<form method="GET" (submit)="searchOrder()">
+  <div class="row justify-content-center">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="control-label">Order ID</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Order ID" name="order" [(ngModel)]="order.friendly_order_id">
+          <div class="input-group-append">
+            <button [disabled]="loading" type="submit" class="btn btn-block btn-primary">
+              Search
+              <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</form>
+<div *ngIf="order.friendly_order_id">
+  <hr>
+  <div id="order">
+    <h2 class="margin-top-0">Your Order</h2>
+    <table class="table table-striped">
+      <tr *ngFor="let person of order.persons">
+          <td>{{person.name}}</td>
+          <td>${{person.price}}</td>
+      </tr>
+      <ng-container *ngFor="let item of order.items; index as i">
+        <tr *ngIf="item.slug != 'camping-people-in-group'">
+          <td>{{item.name}}</td>
+          <td>${{item.price}}</td>
+        </tr>
+      </ng-container>
+        <tr>
+            <th>Total</th>
+            <th>${{order.total}}</th>
+        </tr>
+    </table>
+  </div>
+  <p class="text-center"><button class="btn btn-primary" (click)="sharedService.printOrder('order')">Print Order</button></p>
+</div>
