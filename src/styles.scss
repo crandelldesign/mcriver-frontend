@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'sass/_variables';
+@import 'sass/_mixins';
 @import '~bootstrap/scss/bootstrap';
 @import '~font-awesome/scss/font-awesome';
+@import 'sass/_spacing';
 @import 'sass/_global';
+@import 'sass/_header';
+@import 'sass/_footer';
 @import 'sass/_buttons';
+@import 'sass/_home';
+@import 'sass/_style-guide';

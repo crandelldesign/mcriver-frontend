@@ -4,11 +4,20 @@
   <meta charset="utf-8">
   <title>McriverFrontend</title>
   <base href="/">
+  <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i|Balthazar" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    // Random Background
+    var picNum = Math.floor(Math.random() * 4) + 1;
+    var selectedPic = '/assets/img/default-background'+picNum+'.jpg';
+    document.body.style.backgroundImage = 'url('+selectedPic+')';
+  </script>
 </body>
+
 </html>

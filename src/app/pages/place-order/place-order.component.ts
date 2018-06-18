@@ -113,7 +113,6 @@ export class PlaceOrderComponent implements OnInit {
       }
     });
     if (validated) {
-      console.log(this.productsService.people);
       this.panel2Message.message = '';
       this.isPanel3Disabled = false;
       this.collapse3.toggle();
@@ -131,7 +130,6 @@ export class PlaceOrderComponent implements OnInit {
     if (!this.order.phone) {
       validated = false;
     }
-    console.log(this.order.phone);
     if (validated) {
       this.isPanel4Disabled = false;
       this.collapse4.toggle();
@@ -143,20 +141,13 @@ export class PlaceOrderComponent implements OnInit {
 
   onToken(token: string) {
     this.paymentLoading = true;
-    console.log(token);
-    //console.log(this.order);
-    //console.log(this.productsService.cartItems);
-    //console.log(this.productsService.people);
-    //console.log(this.userService.user.id);
     this.order.payment_method = 'credit card';
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
     this.order.persons = this.productsService.people;
     this.order.user = this.userService.user;
-    console.log(this.order);
     
     this.orderService.sendOrder(this.order, token).subscribe( data => {
-      console.log(data);
       if (data['friendly_order_id']) {
         localStorage.removeItem('cartItems');
         this.router.navigate(['/thank-you', data['friendly_order_id']]);

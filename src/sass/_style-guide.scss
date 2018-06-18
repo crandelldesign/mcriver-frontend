@@ -1,0 +1,37 @@
+// Color Swatches
+.color-swatch {
+    height: 100px;
+    @include shadow-3();
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 5px solid #FFF;
+    color: #FFF;
+    background-color: #eee;
+    &.swatch1 {
+        background-color: $black;
+    }
+    &.swatch2 {
+        background-color: $navyblue;
+    }
+    &.swatch3 {
+        background-color: $gold;
+    }
+    &.swatch4 {
+        background-color: $dallas;
+    }
+    &.swatch5 {
+        background-color: $laser;
+    }
+    &.swatch6 {
+        background-color: $blue;
+    }
+    /*&.swatch7 {
+        background-color: $blue_charcoal;
+    }
+    &.swatch8 {
+        background-color: $ship_gray;
+    }*/
+}
+.details {
+    color: $text-muted;
+}

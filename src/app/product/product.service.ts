@@ -71,12 +71,10 @@ export class ProductService {
   }
 
   public updateCartTotal() {
-    let total = 0
-    console.log(this.cartItems);
+    let total = 0;
     this.cartItems.map(_item => {
       total += (_item.item.price * _item.item.quantity);
     });
-    console.log(total);
     this.cartTotal = total;
   }
 

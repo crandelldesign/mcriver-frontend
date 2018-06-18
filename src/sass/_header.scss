@@ -1,0 +1,46 @@
+.header {
+    background-color: $black;
+    .logo-container {
+	    padding: 20px;
+	    background-color: $black;
+	    border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        text-align: center;
+	    img {
+            max-width: 463px;
+	    }
+    }
+    .navbar {
+        background-color: $gold;
+        border-bottom: 1px solid $black;
+        @include media-breakpoint-up(md) {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .navbar-brand {
+			padding: 8px 15px;
+			img {
+                max-width: 200px;
+			}
+        }
+        .navbar-toggler {
+		    border-color: $black;
+		    i {
+		    	color: $black;
+		    }
+        }
+        li {
+			a {
+				color: $black;
+			}
+			&.active a {
+				background-color: $black;
+				color: $white;
+			}
+			a:hover, a:focus {
+				background-color: $black;
+				color: $gold;
+			}
+		}
+    }
+}

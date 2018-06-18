@@ -26,7 +26,6 @@ export class RegisterFormComponent implements OnInit {
     this.userService.register().subscribe(
       data => {
         this.loading = false;
-        console.log(data);
         if (data['success']) {
           this.userService.processLogin(data);
         } else {

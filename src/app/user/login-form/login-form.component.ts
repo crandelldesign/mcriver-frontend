@@ -24,7 +24,6 @@ export class LoginFormComponent implements OnInit {
     this.loading = true;
     this.userService.login().subscribe(
       data => {
-        console.log(data);
         this.loading = false;
         if (data['success']) {
           this.userService.processLogin(data);

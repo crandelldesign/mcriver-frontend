@@ -108,7 +108,6 @@ export class UserService {
                     });
             } else {
                 // Lets refresh
-                console.log('refresh');
                 this.getRefreshToken();
             }
       
@@ -138,7 +137,6 @@ export class UserService {
         
         return this.http.post(url, {})
             .subscribe(data => {
-                console.log(data);
                 // Store Access Token
                 let access_expiration = new Date().getTime() + (parseInt(data['expires_in']) * 1000);
                 let user_access = JSON.stringify({ 

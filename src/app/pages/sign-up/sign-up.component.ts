@@ -58,7 +58,6 @@ export class SignUpComponent implements OnInit {
 
   updateCart(quantity, item) {
     item.quantity = quantity;
-    console.log(item.quantity);
     let exists = false
     this.productsService.cartItems = this.productsService.cartItems.map(_item => {
       if (_item.item.id == item.id) {

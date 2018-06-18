@@ -13,6 +13,21 @@ body {
 		overflow: hidden;
 	}
 }
+// Content
+.page {
+	background-color: $white;
+	padding: 20px;
+}
+h1 {
+    font-family: 'Balthazar', serif;
+    color: $dallas;
+}
+h2 {
+	color: $laser;
+}
+a.hover {
+	text-decoration: underline;
+}
 // Angular link without href
 a:not([href]){
     cursor: pointer; 

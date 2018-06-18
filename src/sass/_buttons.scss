@@ -1,0 +1,8 @@
+// Buttons 
+.btn-gold {
+    background-color: $gold;
+    color: $white;
+    &:hover, &:focus {
+        background-color: $dallas;
+    }
+}

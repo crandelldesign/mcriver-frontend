@@ -30,9 +30,7 @@ export class ThankYouComponent implements OnInit {
 
   fetchOrder(order) {
     this.orderService.getOrder(order.friendly_order_id).subscribe( data => {
-      console.log(data);
       this.order = data;
-      console.log(this.order);
       this.order.items.forEach( (item, index) => {
         if (item['slug'] == 'camping-people-in-group') {
           this.order.persons[index].price = item.price;

@@ -29,6 +29,8 @@ import { environment } from '../environments/environment';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
 import { SharedService } from './shared/shared.service';
 import { OrderLookupComponent } from './pages/order-lookup/order-lookup.component';
+import { StyleGuideComponent } from './pages/style-guide/style-guide.component';
+import { FooterComponent } from './layouts/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { OrderLookupComponent } from './pages/order-lookup/order-lookup.componen
     LogoutComponent,
     PaymentComponent,
     ThankYouComponent,
-    OrderLookupComponent
+    OrderLookupComponent,
+    StyleGuideComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -52,6 +56,7 @@ import { OrderLookupComponent } from './pages/order-lookup/order-lookup.componen
       { path: 'place-order', component: PlaceOrderComponent },
       { path: 'thank-you/:friendlyOrderId', component: ThankYouComponent },
       { path: 'order-lookup', component: OrderLookupComponent },
+      { path: 'style-guide', component: StyleGuideComponent },
       { path: 'logout', component: LogoutComponent }
     ]),
     FormsModule,
