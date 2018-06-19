@@ -6,7 +6,7 @@ export class Order {
     email: string;
     phone: string;
     total: number = 0;
-    payment_method: string;
+    paymentMethod: string;
     friendly_order_id: string;
     items: Array<Item>;
     persons: Array<any>;

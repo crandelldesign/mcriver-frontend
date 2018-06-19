@@ -57,7 +57,7 @@ export class PlaceOrderComponent implements OnInit {
     this.productsService.fetchCart();
     this.productsService.cartItems.forEach((itemObject) =>{
       let item = itemObject['item'];
-      if (item.slug == 'camping-people-in-group') {
+      if (item.slug == 'camping-people-in-group') { // TODO create boolean to handle if there is no camping
         for (let index = 0; index < item.quantity; index++) {
           this.productsService.people.push({
             name: 'Person #' + (index + 1),
@@ -139,9 +139,9 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  onToken(token: string) {
+  onToken(token: string) { // TODO attach main name to the order, either from person array or separate field
     this.paymentLoading = true;
-    this.order.payment_method = 'credit card';
+    this.order.paymentMethod = 'credit card';
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
     this.order.persons = this.productsService.people;
