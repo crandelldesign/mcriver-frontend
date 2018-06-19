@@ -5,20 +5,24 @@
       <div class="form-group">
         <label class="control-label">Order ID</label>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Order ID" name="order" [(ngModel)]="order.friendly_order_id">
+          <input type="text" class="form-control" placeholder="Order ID" name="order" [(ngModel)]="order.friendly_order_id" [ngClass]="{'is-invalid':orderLookupError}">
           <div class="input-group-append">
             <button [disabled]="loading" type="submit" class="btn btn-block btn-primary">
               Search
               <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading"></i>
             </button>
           </div>
+          <div class="invalid-feedback" *ngIf="orderLookupError">
+            {{orderLookupError}}
+          </div>
         </div>
+        
       </div>
       
     </div>
   </div>
 </form>
-<div *ngIf="order.friendly_order_id">
+<div *ngIf="order.id">
   <hr>
   <div id="order">
     <h2 class="margin-top-0">Your Order</h2>

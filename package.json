@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --configuration=local",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy-dev": "ng build && scp -r dist hosting@67.227.214.76:sites/mcriver/dev-frontend"
   },
   "private": true,
   "dependencies": {

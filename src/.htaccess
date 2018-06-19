@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # If an existing asset or directory is requested go to it as it is
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+    RewriteRule ^ - [L]
+    # If the requested resource doesn't exist, use index.html
+    RewriteRule ^ /index.html
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{HTTP_HOST} !^(.+)\.(.+)\.(.+)
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [L,R=301]
+
+    RewriteCond %{HTTPS} !on
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+    # Note: It’s also recommended to enable HTTP Strict Transport Security (HSTS)
+    # on your HTTPS website to help prevent man-in-the-middle attacks.
+    # See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
+    <IfModule mod_headers.c>
+        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    </IfModule>
+</IfModule>
