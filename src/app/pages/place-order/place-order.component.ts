@@ -73,9 +73,10 @@ export class PlaceOrderComponent implements OnInit {
     this.loggedInSub = this.userService.loggedIn$.subscribe(
       loggedIn => {
         if (this.userService.user.loggedIn) {
-          this.isPanel2Disabled = false;
-          this.collapse2.show();
-          if (!this.isCamping) {
+          if (this.isCamping) {
+            this.isPanel2Disabled = false;
+            this.collapse2.show();
+          } else {
             this.isPanel3Disabled = false;
             this.collapse3.show();
           }
