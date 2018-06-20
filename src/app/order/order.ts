@@ -3,6 +3,7 @@ import { User } from "../user/user";
 
 export class Order {
     id: number;
+    name: string;
     email: string;
     phone: string;
     total: number = 0;

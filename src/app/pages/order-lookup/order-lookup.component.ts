@@ -39,11 +39,11 @@ export class OrderLookupComponent implements OnInit {
         } else {
           // Found
           this.order = data;
-          this.order.items.forEach( (item, index) => {
+          /*this.order.items.forEach( (item, index) => {
             if (item['slug'] == 'camping-people-in-group') {
               this.order.persons[index].price = item.price;
             }
-          });
+          });*/
           this.orderLookupError = '';
         }
         this.loading = false;

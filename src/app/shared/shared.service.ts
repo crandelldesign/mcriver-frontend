@@ -11,7 +11,7 @@ export class SharedService {
     let cssString = [];
     for ( var r = 0; r < document.styleSheets.length; r++ ) {
       var css = <CSSStyleSheet>document.styleSheets[r];
-      if ( css ) {
+      if ( css && (!css.href || (css.href && (!css.href.includes('https')||!css.href.includes('http')))) ) {
         var rules = css.cssRules ? css.cssRules : css.rules;
         if ( rules ) {
           for ( var i = 0; i < rules.length; i++ ) {

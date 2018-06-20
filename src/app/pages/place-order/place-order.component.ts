@@ -18,6 +18,7 @@ export class PlaceOrderComponent implements OnInit {
 
   order = new Order();
   items: Item[];
+  isCamping: boolean = true;
   isPanel1Open = false;
   isPanel2Open = false;
   isPanel3Open = false;
@@ -65,18 +66,23 @@ export class PlaceOrderComponent implements OnInit {
             price: item.price
           });
         }
+      } else {
+        this.isCamping = false;
       }
     });
     this.loggedInSub = this.userService.loggedIn$.subscribe(
       loggedIn => {
         if (this.userService.user.loggedIn) {
-          //this.isPanel1Open = false;
-          //this.isPanel2Open = true;
           this.isPanel2Disabled = false;
           this.collapse2.show();
+          if (!this.isCamping) {
+            this.isPanel3Disabled = false;
+            this.collapse3.show();
+          }
           if (this.productsService.people[0]!=undefined) {
             this.productsService.people[0].name = this.userService.user.name;
           }
+          this.order.name = this.userService.user.name;
           this.order.email = this.userService.user.email;
           this.order.phone = this.userService.user.phone;
         }
@@ -103,6 +109,10 @@ export class PlaceOrderComponent implements OnInit {
   continueAsGuest() {
     this.isPanel2Disabled = false;
     this.collapse2.toggle();
+    if (!this.isCamping) {
+      this.isPanel3Disabled = false;
+      this.collapse3.show();
+    }
   }
 
   submitPanel2() {
@@ -141,6 +151,9 @@ export class PlaceOrderComponent implements OnInit {
 
   onToken(token: string) { // TODO attach main name to the order, either from person array or separate field
     this.paymentLoading = true;
+    if (this.isCamping) {
+      this.order.name = this.order.persons[0].name;
+    }
     this.order.paymentMethod = 'credit card';
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
