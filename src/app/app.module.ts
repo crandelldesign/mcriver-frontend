@@ -31,6 +31,7 @@ import { SharedService } from './shared/shared.service';
 import { OrderLookupComponent } from './pages/order-lookup/order-lookup.component';
 import { StyleGuideComponent } from './pages/style-guide/style-guide.component';
 import { FooterComponent } from './layouts/footer/footer.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FooterComponent } from './layouts/footer/footer.component';
     ThankYouComponent,
     OrderLookupComponent,
     StyleGuideComponent,
-    FooterComponent
+    FooterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -57,7 +59,9 @@ import { FooterComponent } from './layouts/footer/footer.component';
       { path: 'thank-you/:friendlyOrderId', component: ThankYouComponent },
       { path: 'order-lookup', component: OrderLookupComponent },
       { path: 'style-guide', component: StyleGuideComponent },
-      { path: 'logout', component: LogoutComponent }
+      { path: 'logout', component: LogoutComponent },
+      { path: '404', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent }
     ]),
     FormsModule,
     ReactiveFormsModule,
