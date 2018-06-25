@@ -98,7 +98,24 @@
         </div>
         <div class="collapse" data-parent="#accordion" #collapse4="bs-collapse" [collapse]="isPanel4Open" (expanded)="onAccordionChange(4,$event)">
           <div class="card-body">
-            <mc-payment [loading]="paymentLoading" (tokenEmit)="onToken($event)"></mc-payment>
+            <tabset [justified]="true">
+              <tab heading="Pay by Credit Card" id="tab1">
+                <mc-payment [loading]="paymentLoading" (tokenEmit)="submitOrder('credit card',$event)"></mc-payment>
+              </tab>
+              <tab heading="Pay by Check" id="tab2">
+                <p>Please send a check or money order to the address below by July 5th, 2018.</p>
+                <address>
+                  Jim McDonald<br>
+                  4323 Crestdale Ave<br>
+                  West Bloomfield, MI 48323<br>
+                </address>
+                <button class="btn btn-primary" [disabled]="paymentLoading" (click)="submitOrder('check',$event)">
+                  Submit Order
+                  <i class="fa fa-circle-o-notch fa-spin" *ngIf="paymentLoading"></i>
+                </button>
+              </tab>
+            </tabset>
+            
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ body {
 		margin: 20px auto;
 	    border: 1px solid $black;
 	    border-radius: 25px;
-		@include box-shadow($z4-shadow);
+		box-shadow: $z4-shadow;
 		overflow: hidden;
 	}
 }
@@ -17,6 +17,9 @@ body {
 .page {
 	background-color: $white;
 	padding: 20px;
+	.nav-tabs {
+		margin-bottom: 1rem;
+	}
 }
 h1 {
     font-family: 'Balthazar', serif;
@@ -56,7 +59,7 @@ a:not([href]){
 	padding: 25px 27px;
 	line-height: normal;
 	text-align: center;
-	@include box-shadow($z4-shadow);
+	box-shadow: $z4-shadow;
 	@include media-breakpoint-up(lg) {
 		right: 25%;
 	}

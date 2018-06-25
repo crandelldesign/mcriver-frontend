@@ -1,12 +1,13 @@
 // Home Page
 .featured-img-container {
-	margin: 0 -15px;
+	margin: 0 -15px 1rem -15px;
 	@include media-breakpoint-up(sm) {
-		margin: 0;
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 .featured-img {
-	@include box-shadow($z1-shadow);
+	box-shadow: $z1-shadow;
 	border-top: 1px solid $dallas;
 	border-bottom: 1px solid $dallas;
 	@include media-breakpoint-up(sm) {

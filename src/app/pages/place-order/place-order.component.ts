@@ -18,7 +18,7 @@ export class PlaceOrderComponent implements OnInit {
 
   order = new Order();
   items: Item[];
-  isCamping: boolean = true;
+  isCamping: boolean = false;
   isPanel1Open = false;
   isPanel2Open = false;
   isPanel3Open = false;
@@ -54,7 +54,6 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    //
     this.productsService.fetchCart();
     this.productsService.cartItems.forEach((itemObject) =>{
       let item = itemObject['item'];
@@ -66,8 +65,7 @@ export class PlaceOrderComponent implements OnInit {
             price: item.price
           });
         }
-      } else {
-        this.isCamping = false;
+        this.isCamping = true;
       }
     });
     this.loggedInSub = this.userService.loggedIn$.subscribe(
@@ -150,16 +148,16 @@ export class PlaceOrderComponent implements OnInit {
     }
   }
 
-  onToken(token: string) { // TODO attach main name to the order, either from person array or separate field
+  submitOrder(paymentMethod: string, token: string = null) {
     this.paymentLoading = true;
-    if (this.isCamping) {
-      this.order.name = this.order.persons[0].name;
-    }
-    this.order.paymentMethod = 'credit card';
+    this.order.paymentMethod = paymentMethod;
     this.order.total = this.productsService.cartTotal;
     this.order.items = this.productsService.cartItems;
     this.order.persons = this.productsService.people;
     this.order.user = this.userService.user;
+    if (this.isCamping) {
+      this.order.name = this.order.persons[0].name;
+    }
     
     this.orderService.sendOrder(this.order, token).subscribe( data => {
       if (data['friendly_order_id']) {
@@ -168,7 +166,6 @@ export class PlaceOrderComponent implements OnInit {
       }
       this.paymentLoading = false;
     });
-    
   }
 
 }
