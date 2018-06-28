@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>-->
-    <div class="btn-group" role="group" aria-label="Basic example" *ngIf="item.children.length > 0">
+    <div class="btn-group flex-wrap" role="group" aria-label="Basic example" *ngIf="item.children.length > 0">
       <div class="btn-group" dropdown *ngFor="let child of item.children">
         <button dropdownToggle type="button" class="btn dropdown-toggle" [ngClass]="{
           'btn-outline-primary': child.quantity == 0,

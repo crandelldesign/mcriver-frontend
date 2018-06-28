@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user/user.service';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
 @Component({
   selector: 'mc-nav',
@@ -12,10 +12,16 @@ export class NavComponent implements OnInit {
   isCollapsed = true;
 
   constructor(
-    public userService: UserService,
-    public router: Router
-  ) { 
-    this.userService.checkLoggedIn();
+    public router: Router,
+    public userService: UserService
+  ) {
+    router.events.subscribe( (event: Event) => {
+      if (event instanceof NavigationStart) {
+          // Show loading indicator
+          console.log(event);
+        this.isCollapsed = true;
+      }
+    });
   }
 
   ngOnInit() {

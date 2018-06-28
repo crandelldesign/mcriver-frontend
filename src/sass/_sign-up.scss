@@ -1,0 +1,12 @@
+mc-sign-up {
+    .btn-group {
+        > .btn-group {
+            > .btn.dropdown-toggle {
+                @include media-breakpoint-down(sm) {
+                    border-radius: 0.25rem;
+                    margin: 0 2px 5px 2px;
+                }
+            }
+        }
+    }
+}
