@@ -8,6 +8,7 @@ export class Order {
     phone: string;
     total: number = 0;
     paymentMethod: string;
+    payment: string;
     friendly_order_id: string;
     items: Array<Item>;
     persons: Array<any>;

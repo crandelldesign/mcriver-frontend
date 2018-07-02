@@ -47,7 +47,7 @@ export class PlaceOrderComponent implements OnInit {
   constructor(
     public productsService: ProductService,
     private orderService: OrderService,
-    private userService: UserService,
+    public userService: UserService,
     private router: Router
   ) { 
     this.productsService.people = [];

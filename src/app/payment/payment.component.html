@@ -1,5 +1,5 @@
 <div class="alert" *ngIf="paymentFormErrors.message" [ngClass]="['alert-'+paymentFormErrors.type]"><span [innerHtml]="paymentFormErrors.message"></span></div>
-<form novalidate (ngSubmit)="createToken($event)">
+<form novalidate (ngSubmit)="createToken()">
   <div class="form-group">
     <label class="">Name on Card</label>
     <input [(ngModel)]="cardHolderName" type="text" class="form-control" name="cardHolderName" placeholder="Card Holder's Name">
