@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-dev": "ng build && scp -r dist hosting@67.227.214.76:sites/mcriver/dev-frontend"
+    "deploy-dev": "ng build && scp -r dist hosting@67.227.214.76:sites/mcriver/dev-frontend",
+    "deploy-prod": "ng build --prod && scp -r dist hosting@67.227.214.76:sites/mcriver/prod-frontend"
   },
   "private": true,
   "dependencies": {
