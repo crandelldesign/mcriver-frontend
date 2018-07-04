@@ -17,8 +17,7 @@ export class NavComponent implements OnInit {
   ) {
     router.events.subscribe( (event: Event) => {
       if (event instanceof NavigationStart) {
-          // Show loading indicator
-          console.log(event);
+        // Show loading indicator
         this.isCollapsed = true;
       }
     });

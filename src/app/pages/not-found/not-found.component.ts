@@ -10,8 +10,7 @@ export class NotFoundComponent implements OnInit {
 
   constructor(
     private router: Router
-  ) { 
-    console.log(router.url);
+  ) {
     if (router.url.includes('/index.php')) {
       let url = router.url.replace('/index.php', '');
       this.router.navigate([url]);
