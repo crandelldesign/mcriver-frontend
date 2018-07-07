@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import * as jwt_decode from "jwt-decode";
 
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
@@ -29,7 +30,8 @@ export class UserService {
 
     constructor(
         private http: HttpClient,
-        httpErrorHandler: HttpErrorHandler) {
+        httpErrorHandler: HttpErrorHandler
+    ) {
         this.handleError = httpErrorHandler.createHandleError('UserService');
     }
 
@@ -94,6 +96,7 @@ export class UserService {
             let user_access = JSON.parse(localStorage.getItem('user_access'));
 
             if (new Date().getTime() < parseInt(user_access.access_expiration)) {
+
                 return this.getLoggedInUser()
                     .subscribe(
                         user => {
@@ -120,6 +123,35 @@ export class UserService {
             return new User();
         
       
+        }
+    }
+
+    isLoggedIn() {
+        if (localStorage.getItem('user_access') != null) {
+            // If the Access Token Exists, we need to check if it expired
+            let user_access = JSON.parse(localStorage.getItem('user_access'));
+
+            if (new Date().getTime() < parseInt(user_access.access_expiration)) {
+                return true
+            } else {
+                return false
+            }
+      
+        } else {
+            return false
+        }
+    }
+
+    isAdminUser() {
+        if (this.isLoggedIn()) {
+            let user_access = JSON.parse(localStorage.getItem('user_access'));
+            let isAdmin = user_access.access_token.is_admin;
+            if (isAdmin) {
+                return true;
+            }
+            return false
+        } else {
+            return false;
         }
     }
 

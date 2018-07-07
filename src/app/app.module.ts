@@ -32,6 +32,11 @@ import { OrderLookupComponent } from './pages/order-lookup/order-lookup.componen
 import { StyleGuideComponent } from './pages/style-guide/style-guide.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -71,7 +76,14 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
     AccordionModule.forRoot(),
-    NgxStripeModule.forRoot(environment.stripeKey)
+    NgxStripeModule.forRoot(environment.stripeKey),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3001'],
+        blacklistedRoutes: ['localhost:3001/auth/']
+      }
+    })
   ],
   providers: [
     UserService,
