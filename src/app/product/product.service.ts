@@ -38,7 +38,15 @@ export class ProductService {
         for (let y = 0; y < this.categories[x].items.length; y++) {
           
           if (this.categories[x].items[y].children.length == 0) {
-            this.categories[x].items[y].quantity = 0;
+            if (this.categories[x].slug == 'camping') {
+              this.categories[x].items[y].quantity = 1; // If camping, select 1 by default
+              this.cartItems.push({
+                item:this.categories[x].items[y]
+              });
+            } else {
+              this.categories[x].items[y].quantity = 0;
+            }
+            
             this.cartItems = this.cartItems.map(_item => {
               if (_item.item.id == this.categories[x].items[y].id) {
                 this.categories[x].items[y].quantity = _item.item.quantity;
