@@ -22,7 +22,6 @@
               "src/.htaccess"
             ],
             "styles": [
-              "src/styles.scss"
             ],
             "scripts": []
           },

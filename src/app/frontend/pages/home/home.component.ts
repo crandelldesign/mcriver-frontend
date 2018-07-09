@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { UserService } from '../../user/user.service';
+import { UserService } from '../../../user/user.service';
 
 @Component({
   selector: 'mc-home',

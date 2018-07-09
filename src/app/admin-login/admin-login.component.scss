@@ -1,0 +1,12 @@
+@import '../../sass/admin/variables';
+@import '~font-awesome/scss/font-awesome';
+@import "~@coreui/coreui/scss/bootstrap-variables";
+@import "~@coreui/coreui/scss/coreui";
+
+// Set Full Heights
+mc-admin-login {
+    height: 100vh;
+    .app-body {
+        height: 100vh;
+    }
+}

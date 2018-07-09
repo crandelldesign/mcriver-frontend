@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Item } from '../../product/item';
-import { ProductService } from '../../product/product.service';
-import { UserService } from '../../user/user.service';
+import { Item } from '../../../product/item';
+import { ProductService } from '../../../product/product.service';
+import { UserService } from '../../../user/user.service';
 
 import { CollapseDirective } from 'ngx-bootstrap/collapse';
-import { Order } from '../../order/order';
-import { OrderService } from '../../order/order.service';
+import { Order } from '../../../order/order';
+import { OrderService } from '../../../order/order.service';
 import { Router } from '@angular/router';
 
 @Component({

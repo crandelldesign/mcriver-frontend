@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Order } from '../../order/order';
-import { OrderService } from '../../order/order.service';
+import { Order } from '../../../order/order';
+import { OrderService } from '../../../order/order.service';
 import {  } from 'print-js';
-import { SharedService } from '../../shared/shared.service';
+import { SharedService } from '../../../shared/shared.service';
 
 @Component({
   selector: 'mc-thank-you',

@@ -145,7 +145,8 @@ export class UserService {
     isAdminUser() {
         if (this.isLoggedIn()) {
             let user_access = JSON.parse(localStorage.getItem('user_access'));
-            let isAdmin = user_access.access_token.is_admin;
+            let tokenInfo = jwt_decode(user_access.access_token);
+            let isAdmin = tokenInfo.is_admin;
             if (isAdmin) {
                 return true;
             }
@@ -155,7 +156,7 @@ export class UserService {
         }
     }
 
-    getLoggedInUser():Observable<User> {
+    getLoggedInUser():Observable<any> {
         let url = environment.api+'/auth/user';
         
         return this.http.get(url)
