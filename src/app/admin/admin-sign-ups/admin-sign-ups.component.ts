@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { OrderService } from '../../order/order.service';
-
-class DateOnlyPipe extends DatePipe {
-  public transform(value): any {
-    return super.transform(value, 'MM/dd/y');
-  }
-}
+import { Order } from '../../order/order';
 
 @Component({
   selector: 'mc-admin-sign-ups',
@@ -21,13 +16,9 @@ export class AdminSignUpsComponent implements OnInit {
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
 
-  columns = [
-    { prop: 'name' },
-    { name: 'People in Group', prop: 'person_count' },
-    { name: 'Email' },
-    { name: 'Phone' },
-    { name: 'Registered', prop: 'created_at', pipe: new DateOnlyPipe('en-US') },
-  ];
+  order: Order = new Order();
+
+  @ViewChild('orderDetailsModal') orderDetailsModal: ModalDirective;
 
   constructor(
     public orderService: OrderService
@@ -46,6 +37,12 @@ export class AdminSignUpsComponent implements OnInit {
       this.loadingIndicator = false;
       console.log(orders);
     });
+  }
+
+  openOrderModal(order, event) {
+    event.preventDefault();
+    this.order = order;
+    this.orderDetailsModal.show();
   }
 
 }

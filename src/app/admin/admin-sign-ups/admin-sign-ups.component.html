@@ -4,16 +4,93 @@
   </div>
   <div class="card-body">
     <ngx-datatable
-      class="bootstrap"
-      [rows]="rows"
+      #myTable
+      class='bootstrap'
       [loadingIndicator]="loadingIndicator"
-      [columns]="columns"
       [columnMode]="'force'"
       [headerHeight]="40"
       [footerHeight]="40"
-      [limit]="10"
       [rowHeight]="'auto'"
+      [scrollbarV]="false"
+      [rows]='rows'
+      [limit]="10"
       [reorderable]="reorderable">
+      <!-- Column Templates -->
+      <ngx-datatable-column name="Name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a href="#" data-toggle="modal" (click)="openOrderModal(row, $event)">{{row.name}}</a>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="People in Group">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.person_count}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Email">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.email}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Phone">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.phone}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Registered">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.created_at | date:'MM/dd/y'}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Total">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.total | currency}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Payment">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.payment_method | titlecase}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.is_paid?'Paid':'Unpaid'}}
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
   </div>
 </div>
+
+<div bsModal #orderDetailsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Oder Details</h4>
+        <button type="button" class="close" (click)="orderDetailsModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <tr *ngFor="let person of order.persons">
+              <td>{{person.name}}</td>
+              <td>${{person.price}}</td>
+          </tr>
+          <ng-container *ngFor="let item of order.items; index as i">
+            <tr *ngIf="item.slug != 'camping-people-in-group'">
+              <td>{{item.name}}</td>
+              <td>${{item.price}}</td>
+            </tr>
+          </ng-container>
+            <tr>
+                <th>Total</th>
+                <th>${{order.total}}</th>
+            </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="orderDetailsModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

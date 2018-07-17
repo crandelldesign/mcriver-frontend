@@ -10,6 +10,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -33,7 +34,8 @@ import {
     AppHeaderModule,
     AppSidebarModule,
     PerfectScrollbarModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     AdminComponent,
