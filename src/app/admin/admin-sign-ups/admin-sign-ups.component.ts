@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { OrderService } from '../../order/order.service';
 import { Order } from '../../order/order';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'mc-admin-sign-ups',
@@ -21,7 +22,8 @@ export class AdminSignUpsComponent implements OnInit {
   @ViewChild('orderDetailsModal') orderDetailsModal: ModalDirective;
 
   constructor(
-    public orderService: OrderService
+    public orderService: OrderService,
+    public sharedService: SharedService
   ) { }
 
   ngOnInit() {

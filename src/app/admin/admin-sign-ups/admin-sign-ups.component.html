@@ -69,7 +69,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="order">
         <table class="table table-striped">
           <tr *ngFor="let person of order.persons">
               <td>{{person.name}}</td>
@@ -89,7 +89,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="orderDetailsModal.hide()">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button class="btn btn-primary" (click)="sharedService.printOrder('order')">Print Order</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
