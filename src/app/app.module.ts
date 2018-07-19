@@ -33,6 +33,7 @@ import { AdminGuard } from './user/admin.guard';
 import { SharedModule } from './shared/shared.module';
 import { FrontendModule } from './frontend/frontend.module';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { NotFoundComponent } from './frontend/pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +41,9 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     //LoginFormComponent,
     //SignUpComponent,
     //PlaceOrderComponent,
-    RegisterFormComponent,
+    //RegisterFormComponent,
     LogoutComponent,
-    PaymentComponent,
+    //PaymentComponent,
     AdminLoginComponent,
     //ThankYouComponent,
     //OrderLookupComponent,
@@ -66,7 +67,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
         loadChildren: './frontend/frontend.module#FrontendModule',
         pathMatch: 'full'
       },
-      { path: 'logout', component: LogoutComponent }
+      { path: 'logout', component: LogoutComponent },
+      { path: '**', component: NotFoundComponent }
       //{ path: '', component: HomeComponent, pathMatch: 'full'},
       /*{ path: 'sign-up', component: SignUpComponent },
       { path: 'place-order', component: PlaceOrderComponent },

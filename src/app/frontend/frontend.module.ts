@@ -12,6 +12,13 @@ import { FrontendComponent } from './frontend.component';
 import { NavComponent } from './layouts/nav/nav.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { PlaceOrderComponent } from './pages/place-order/place-order.component';
+import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { OrderLookupComponent } from './pages/order-lookup/order-lookup.component';
+import { StyleGuideComponent } from './pages/style-guide/style-guide.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { FormsModule } from '../../../node_modules/@angular/forms';
 
 @NgModule({
   imports: [
@@ -22,13 +29,20 @@ import { HomeComponent } from './pages/home/home.component';
     TabsModule.forRoot(),
     AccordionModule.forRoot(),
     NgxStripeModule.forRoot(environment.stripeKey),
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   declarations: [
     FrontendComponent,
     NavComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    SignUpComponent,
+    PlaceOrderComponent,
+    ThankYouComponent,
+    OrderLookupComponent,
+    StyleGuideComponent,
+    NotFoundComponent
 
   ]
 })
