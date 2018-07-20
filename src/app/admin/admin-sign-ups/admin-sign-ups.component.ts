@@ -16,6 +16,14 @@ export class AdminSignUpsComponent implements OnInit {
   rows = [];
   loadingIndicator: boolean = true;
   reorderable: boolean = true;
+  customClasses = {
+    sortAscending: 'fa fa-sort-asc',
+    sortDescending: 'fa fa-sort-desc',
+    pagerLeftArrow: 'fa fa-angle-left',
+    pagerRightArrow: 'fa fa-angle-right',
+    pagerPrevious: 'fa fa-step-backward',
+    pagerNext: 'fa fa-step-forward'
+  };
 
   order: Order = new Order();
 
