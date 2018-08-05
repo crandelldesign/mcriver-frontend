@@ -21,7 +21,7 @@ import { LogoutComponent } from './user/logout/logout.component';
 import { HttpErrorHandler }     from './http-error-handler.service';
 import { MessageService }       from './message.service';
 import { OrderService } from './order/order.service';
-import { PaymentComponent } from './payment/payment.component';
+//import { PaymentComponent } from './payment/payment.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { environment } from '../environments/environment';
 //import { ThankYouComponent } from './pages/thank-you/thank-you.component';

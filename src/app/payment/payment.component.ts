@@ -1,6 +1,6 @@
-import { Component, OnInit, NgZone, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
 
@@ -38,9 +38,9 @@ export class PaymentComponent implements OnInit {
   //stripe = Stripe(environment.stripeKey);
 
   constructor(
-    private fb: FormBuilder,
+    //private fb: FormBuilder,
     private stripeService: StripeService,
-    private _zone: NgZone
+    //private _zone: NgZone
   ) { }
 
   ngOnInit() {

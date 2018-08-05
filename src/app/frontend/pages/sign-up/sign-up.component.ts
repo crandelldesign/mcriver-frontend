@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
 import { ProductService } from '../../../product/product.service';
 import { Category } from '../../../product/category';
 import { Item } from '../../../product/item';
