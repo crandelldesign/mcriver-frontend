@@ -1,0 +1,31 @@
+<div class="card" *ngFor="let category of categories">
+  <div class="card-header">
+    {{category.name}}
+  </div>
+  <div class="card-body">
+      <ngx-datatable
+      #myTable
+      class='striped'
+      [loadingIndicator]="loadingIndicator"
+      [columnMode]="'force'"
+      [headerHeight]="40"
+      [footerHeight]="40"
+      [rowHeight]="'auto'"
+      [scrollbarV]="false"
+      [rows]='category.items'
+      [reorderable]="reorderable"
+      [cssClasses]='customClasses'>
+      <!-- Column Templates -->
+      <ngx-datatable-column name="Name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.name}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="People in Group">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.quantity}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

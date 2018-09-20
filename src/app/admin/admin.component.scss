@@ -1,12 +1,12 @@
 @import '../../sass/admin/variables';
 @import '~font-awesome/scss/font-awesome';
-@import "~@coreui/coreui/scss/bootstrap-variables";
+@import "~@coreui/coreui/scss/variables";
 @import "~@coreui/coreui/scss/coreui";
 @import '../../sass/admin/datatables';
 //@import "~@swimlane/ngx-datatable/assets/icons";
 
 // Global
-body {
+body, mc-admin {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
@@ -18,5 +18,16 @@ body {
 header.app-header {
     button.navbar-toggler:nth-of-type(3) {
         display: none;
+    }
+}
+
+// Dashboard
+.dashboard-card {
+    transition: transform .5s ease-out;
+    &:hover {
+        transform: translateY(-10px);
+    }
+    a:hover {
+        text-decoration: none;
     }
 }

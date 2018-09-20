@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from "rxjs/Observable";
 import { Category } from './category';
@@ -17,9 +17,13 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
-  public getCategories(): Observable <Category[]> {
+  public getCategories(flatChildren: boolean = false): Observable <Category[]> {
     let url = environment.api + '/categories';
-    return this.http.get<Category[]>(url)
+
+    let params = new HttpParams();
+    (flatChildren)?params = params.append('flatChildren', 'true'):'';
+
+    return this.http.get<Category[]>(url, {params: params})
       .catch((error: Response | any) => {
         return Observable.throw('User not logged in');
     });

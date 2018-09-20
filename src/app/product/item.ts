@@ -1,3 +1,5 @@
+import { Order } from "../order/order";
+
 export class Item {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export class Item {
     price: number;
     quantity: number = 0;
     children: Array<Item>;
+    orders: Array<Order>;
 }

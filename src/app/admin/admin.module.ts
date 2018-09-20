@@ -22,7 +22,8 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
-} from '@coreui/angular'
+} from '@coreui/angular';
+import { AdminEquipmentTotalsComponent } from './admin-equipment-totals/admin-equipment-totals.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {
   declarations: [
     AdminComponent,
     AdminHomeComponent,
-    AdminSignUpsComponent
+    AdminSignUpsComponent,
+    AdminEquipmentTotalsComponent
   ]
 })
 export class AdminModule { }
