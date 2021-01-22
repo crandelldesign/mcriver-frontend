@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  api: 'https://mcriver.test/api',
+  api: 'http://localhost:4200/api',
   stripeKey: 'pk_test_Jkq2zhGLCLGk8UTvuel8wu15'
 };

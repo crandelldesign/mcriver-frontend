@@ -1,0 +1,31 @@
+name: Deploy Prod
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install npm dependencies
+      run: npm install
+    - name: Run build task
+      run: npm run build:dev
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: 64.4.160.12
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: 7822
+          TARGET: /var/www/vicksburgfamilydentistry/frontend-prod

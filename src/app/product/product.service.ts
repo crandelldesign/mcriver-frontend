@@ -23,10 +23,7 @@ export class ProductService {
     let params = new HttpParams();
     (flatChildren)?params = params.append('flatChildren', 'true'):'';
 
-    return this.http.get<Category[]>(url, {params: params})
-      .catch((error: Response | any) => {
-        return Observable.throw('User not logged in');
-    });
+    return this.http.get<Category[]>(url, {params: params});
   }
 
   public fetchCategories() {

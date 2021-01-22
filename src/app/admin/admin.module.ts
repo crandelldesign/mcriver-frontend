@@ -16,24 +16,24 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-import {
+/*import {
   AppAsideModule,
   AppBreadcrumbModule,
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
-} from '@coreui/angular';
+} from '@coreui/angular';*/
 import { AdminEquipmentTotalsComponent } from './admin-equipment-totals/admin-equipment-totals.component';
 
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
-    AppAsideModule,
-    AppBreadcrumbModule.forRoot(),
-    AppFooterModule,
-    AppHeaderModule,
-    AppSidebarModule,
+    // AppAsideModule,
+    // AppBreadcrumbModule.forRoot(),
+    // AppFooterModule,
+    // AppHeaderModule,
+    // AppSidebarModule,
     PerfectScrollbarModule,
     NgxDatatableModule,
     ModalModule.forRoot()
