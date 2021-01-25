@@ -28,4 +28,4 @@ jobs:
           REMOTE_HOST: 64.4.160.12
           REMOTE_USER: ${{ secrets.SSH_USERNAME }}
           REMOTE_PORT: 7822
-          TARGET: /var/www/vicksburgfamilydentistry/frontend-prod
+          TARGET: /var/www/mcriver/frontend-prod
